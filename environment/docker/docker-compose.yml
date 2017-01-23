@@ -1,0 +1,8 @@
+version: '2'
+services:
+  postgres:
+    build: ./postgres
+    image: "debian:pjMonitor-postgres"
+    ports:
+      - "5432:5432"
+    container_name: pjMonitor-postgres
