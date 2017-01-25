@@ -28,8 +28,8 @@ task gen << {
     ant.taskdef(resource: 'domagentask.properties',
             classpath: configurations.domaGenRuntime.asPath)
     ant.gen(url: "${props.url}", user: "${props.username}", password: "${props.password}") {
-        entityConfig(packageName: 'com.gyamin.stocktrace.entity')
-        daoConfig(packageName: 'com.gyamin.stocktrace.dao', configClassName: 'com.gyamin.stocktrace.AppConfig')
+        entityConfig(packageName: 'com.gyamin.pjmonitor.entity')
+        daoConfig(packageName: 'com.gyamin.pjmonitor.dao', configClassName: 'com.gyamin.pjmonitor.AppConfig')
         sqlConfig()
     }
 }
