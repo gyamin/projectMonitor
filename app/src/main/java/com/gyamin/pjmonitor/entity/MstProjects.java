@@ -1,8 +1,11 @@
 package com.gyamin.pjmonitor.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
+import org.seasar.doma.GeneratedValue;
+import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 
@@ -14,8 +17,9 @@ public class MstProjects {
 
     /** */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Long id;
+    Integer id;
 
     /** */
     @Column(name = "project_no")
@@ -51,18 +55,18 @@ public class MstProjects {
 
     /** */
     @Column(name = "created_at")
-    LocalDate createdAt;
+    LocalDateTime createdAt;
 
     /** */
     @Column(name = "modified_at")
-    LocalDate modifiedAt;
+    LocalDateTime modifiedAt;
 
     /** 
      * Returns the id.
      * 
      * @return the id
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -71,7 +75,7 @@ public class MstProjects {
      * 
      * @param id the id
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -224,7 +228,7 @@ public class MstProjects {
      * 
      * @return the createdAt
      */
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
@@ -233,7 +237,7 @@ public class MstProjects {
      * 
      * @param createdAt the createdAt
      */
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -242,7 +246,7 @@ public class MstProjects {
      * 
      * @return the modifiedAt
      */
-    public LocalDate getModifiedAt() {
+    public LocalDateTime getModifiedAt() {
         return modifiedAt;
     }
 
@@ -251,7 +255,7 @@ public class MstProjects {
      * 
      * @param modifiedAt the modifiedAt
      */
-    public void setModifiedAt(LocalDate modifiedAt) {
+    public void setModifiedAt(LocalDateTime modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 }

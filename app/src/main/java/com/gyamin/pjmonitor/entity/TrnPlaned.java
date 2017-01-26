@@ -2,8 +2,11 @@ package com.gyamin.pjmonitor.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
+import org.seasar.doma.GeneratedValue;
+import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 
@@ -15,8 +18,9 @@ public class TrnPlaned {
 
     /** */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Long id;
+    Integer id;
 
     /** */
     @Column(name = "work_plan_date")
@@ -24,7 +28,7 @@ public class TrnPlaned {
 
     /** */
     @Column(name = "worker_id")
-    Long workerId;
+    Integer workerId;
 
     /** */
     @Column(name = "job_no")
@@ -40,18 +44,18 @@ public class TrnPlaned {
 
     /** */
     @Column(name = "created_at")
-    LocalDate createdAt;
+    LocalDateTime createdAt;
 
     /** */
     @Column(name = "modified_at")
-    LocalDate modifiedAt;
+    LocalDateTime modifiedAt;
 
     /** 
      * Returns the id.
      * 
      * @return the id
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -60,7 +64,7 @@ public class TrnPlaned {
      * 
      * @param id the id
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -87,7 +91,7 @@ public class TrnPlaned {
      * 
      * @return the workerId
      */
-    public Long getWorkerId() {
+    public Integer getWorkerId() {
         return workerId;
     }
 
@@ -96,7 +100,7 @@ public class TrnPlaned {
      * 
      * @param workerId the workerId
      */
-    public void setWorkerId(Long workerId) {
+    public void setWorkerId(Integer workerId) {
         this.workerId = workerId;
     }
 
@@ -159,7 +163,7 @@ public class TrnPlaned {
      * 
      * @return the createdAt
      */
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
@@ -168,7 +172,7 @@ public class TrnPlaned {
      * 
      * @param createdAt the createdAt
      */
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -177,7 +181,7 @@ public class TrnPlaned {
      * 
      * @return the modifiedAt
      */
-    public LocalDate getModifiedAt() {
+    public LocalDateTime getModifiedAt() {
         return modifiedAt;
     }
 
@@ -186,7 +190,7 @@ public class TrnPlaned {
      * 
      * @param modifiedAt the modifiedAt
      */
-    public void setModifiedAt(LocalDate modifiedAt) {
+    public void setModifiedAt(LocalDateTime modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 }

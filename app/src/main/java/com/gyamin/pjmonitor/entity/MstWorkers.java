@@ -1,8 +1,10 @@
 package com.gyamin.pjmonitor.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
+import org.seasar.doma.GeneratedValue;
+import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 
@@ -14,8 +16,9 @@ public class MstWorkers {
 
     /** */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Long id;
+    Integer id;
 
     /** */
     @Column(name = "family_name")
@@ -39,26 +42,26 @@ public class MstWorkers {
 
     /** */
     @Column(name = "department_id")
-    Long departmentId;
+    Integer departmentId;
 
     /** */
     @Column(name = "payment_id")
-    Long paymentId;
+    Integer paymentId;
 
     /** */
     @Column(name = "created_at")
-    LocalDate createdAt;
+    LocalDateTime createdAt;
 
     /** */
     @Column(name = "modified_at")
-    LocalDate modifiedAt;
+    LocalDateTime modifiedAt;
 
     /** 
      * Returns the id.
      * 
      * @return the id
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -67,7 +70,7 @@ public class MstWorkers {
      * 
      * @param id the id
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -166,7 +169,7 @@ public class MstWorkers {
      * 
      * @return the departmentId
      */
-    public Long getDepartmentId() {
+    public Integer getDepartmentId() {
         return departmentId;
     }
 
@@ -175,7 +178,7 @@ public class MstWorkers {
      * 
      * @param departmentId the departmentId
      */
-    public void setDepartmentId(Long departmentId) {
+    public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
     }
 
@@ -184,7 +187,7 @@ public class MstWorkers {
      * 
      * @return the paymentId
      */
-    public Long getPaymentId() {
+    public Integer getPaymentId() {
         return paymentId;
     }
 
@@ -193,7 +196,7 @@ public class MstWorkers {
      * 
      * @param paymentId the paymentId
      */
-    public void setPaymentId(Long paymentId) {
+    public void setPaymentId(Integer paymentId) {
         this.paymentId = paymentId;
     }
 
@@ -202,7 +205,7 @@ public class MstWorkers {
      * 
      * @return the createdAt
      */
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
@@ -211,7 +214,7 @@ public class MstWorkers {
      * 
      * @param createdAt the createdAt
      */
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -220,7 +223,7 @@ public class MstWorkers {
      * 
      * @return the modifiedAt
      */
-    public LocalDate getModifiedAt() {
+    public LocalDateTime getModifiedAt() {
         return modifiedAt;
     }
 
@@ -229,7 +232,7 @@ public class MstWorkers {
      * 
      * @param modifiedAt the modifiedAt
      */
-    public void setModifiedAt(LocalDate modifiedAt) {
+    public void setModifiedAt(LocalDateTime modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 }

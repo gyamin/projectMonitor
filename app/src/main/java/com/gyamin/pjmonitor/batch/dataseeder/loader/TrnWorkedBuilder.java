@@ -28,7 +28,7 @@ public class TrnWorkedBuilder extends AbstractBuilder {
     void prepareImportBeansFromFile() {
         //
         SagyouJikanShukei sagyouJikanShukei = new SagyouJikanShukei();
-        this.trnWorkedList = sagyouJikanShukei.getImportBeansFromFile();
+        this.trnWorkedList = sagyouJikanShukei.getImportBeansFromFile(true);
     }
 
     /**

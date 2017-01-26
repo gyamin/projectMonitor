@@ -2,8 +2,11 @@ package com.gyamin.pjmonitor.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
+import org.seasar.doma.GeneratedValue;
+import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 
@@ -15,8 +18,9 @@ public class TrnWorked {
 
     /** */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Long id;
+    Integer id;
 
     /** */
     @Column(name = "work_date")
@@ -40,18 +44,18 @@ public class TrnWorked {
 
     /** */
     @Column(name = "created_at")
-    LocalDate createdAt;
+    LocalDateTime createdAt;
 
     /** */
     @Column(name = "modified_at")
-    LocalDate modifiedAt;
+    LocalDateTime modifiedAt;
 
     /** 
      * Returns the id.
      * 
      * @return the id
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -60,7 +64,7 @@ public class TrnWorked {
      * 
      * @param id the id
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -159,7 +163,7 @@ public class TrnWorked {
      * 
      * @return the createdAt
      */
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
@@ -168,7 +172,7 @@ public class TrnWorked {
      * 
      * @param createdAt the createdAt
      */
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -177,7 +181,7 @@ public class TrnWorked {
      * 
      * @return the modifiedAt
      */
-    public LocalDate getModifiedAt() {
+    public LocalDateTime getModifiedAt() {
         return modifiedAt;
     }
 
@@ -186,7 +190,7 @@ public class TrnWorked {
      * 
      * @param modifiedAt the modifiedAt
      */
-    public void setModifiedAt(LocalDate modifiedAt) {
+    public void setModifiedAt(LocalDateTime modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 }

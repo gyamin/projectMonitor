@@ -2,8 +2,11 @@ package com.gyamin.pjmonitor.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
+import org.seasar.doma.GeneratedValue;
+import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 
@@ -15,12 +18,13 @@ public class TrnProjectOrders {
 
     /** */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Long id;
+    Integer id;
 
     /** */
     @Column(name = "project_id")
-    Long projectId;
+    Integer projectId;
 
     /** */
     @Column(name = "department_id")
@@ -60,18 +64,18 @@ public class TrnProjectOrders {
 
     /** */
     @Column(name = "created_at")
-    LocalDate createdAt;
+    LocalDateTime createdAt;
 
     /** */
     @Column(name = "modified_at")
-    LocalDate modifiedAt;
+    LocalDateTime modifiedAt;
 
     /** 
      * Returns the id.
      * 
      * @return the id
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -80,7 +84,7 @@ public class TrnProjectOrders {
      * 
      * @param id the id
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -89,7 +93,7 @@ public class TrnProjectOrders {
      * 
      * @return the projectId
      */
-    public Long getProjectId() {
+    public Integer getProjectId() {
         return projectId;
     }
 
@@ -98,7 +102,7 @@ public class TrnProjectOrders {
      * 
      * @param projectId the projectId
      */
-    public void setProjectId(Long projectId) {
+    public void setProjectId(Integer projectId) {
         this.projectId = projectId;
     }
 
@@ -269,7 +273,7 @@ public class TrnProjectOrders {
      * 
      * @return the createdAt
      */
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
@@ -278,7 +282,7 @@ public class TrnProjectOrders {
      * 
      * @param createdAt the createdAt
      */
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -287,7 +291,7 @@ public class TrnProjectOrders {
      * 
      * @return the modifiedAt
      */
-    public LocalDate getModifiedAt() {
+    public LocalDateTime getModifiedAt() {
         return modifiedAt;
     }
 
@@ -296,7 +300,7 @@ public class TrnProjectOrders {
      * 
      * @param modifiedAt the modifiedAt
      */
-    public void setModifiedAt(LocalDate modifiedAt) {
+    public void setModifiedAt(LocalDateTime modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 }
