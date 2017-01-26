@@ -1,16 +1,12 @@
 package com.gyamin.pjmonitor.batch.dataseeder.loader;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import com.gyamin.pjmonitor.batch.dataseeder.csvreader.CsvReaderInterface;
+import com.gyamin.pjmonitor.AppConfig;
 import com.gyamin.pjmonitor.batch.dataseeder.csvreader.SagyouJikanShukei;
+import com.gyamin.pjmonitor.dao.TrnWorkedDao;
+import com.gyamin.pjmonitor.dao.TrnWorkedDaoImpl;
 import com.gyamin.pjmonitor.entity.TrnWorked;
-import com.gyamin.pjmonitor.common.AppLogging;
-import dataseeder.csvreader.IssueInterface;
-import dataseeder.csvreader.FirstDJ;
-import dataseeder.csvreader.SecondDJ;
+import org.seasar.doma.jdbc.tx.TransactionManager;
 
 import java.sql.SQLException;
 
@@ -19,39 +15,36 @@ import java.sql.SQLException;
  * @author Yasumasa
  */
 public class TrnWorkedBuilder extends AbstractBuilder {
-  // 取り込みデータ配列
-  private ArrayList<TrnWorked> trnWorkeds = new ArrayList<>();
 
-  /**
-   * データソースからデータを読み込み、データ配列を準備する
-   */
-  @Override
-  void prepareImportBeansFromFile() {
-    // 対象CSV Reader設定
-    CsvReaderInterface targetCsvs[] = new CsvReaderInterface[1];
-    targetCsvs[0] = new SagyouJikanShukei();
-    for (IssueInterface elem : targetCsvs) {
-      // 読み込んだIssueBeanオブジェクトを結合
-      System.out.println(elem.toString());
-      this.importBeans.addAll(elem.getImportBeansFromFile());
+    static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(TrnWorkedBuilder.class.getName());
+
+    // 取り込みデータ配列
+    private ArrayList<TrnWorked> trnWorkedList = new ArrayList<>();
+
+    /**
+     * CSVファイルからデータを読み込み、データ配列を準備する
+     */
+    @Override
+    void prepareImportBeansFromFile() {
+        //
+        SagyouJikanShukei sagyouJikanShukei = new SagyouJikanShukei();
+        this.trnWorkedList = sagyouJikanShukei.getImportBeansFromFile();
     }
-  }
-  
-  /**
-   * データ配列からテーブルにデータを登録する
-   */
-  @Override
-  public void buildUpData() {
-    Logger.getLogger(AppLogging.LOG_NAME).log(Level.INFO, "START: issuesテーブルデータ設定");
-    try {
-      dao.Issues daoIssues = new dao.Issues(null);
-      // データ削除
-      daoIssues.truncateIssues();
-      // データ登録
-      this.prepareImportBeansFromFile();
-      daoIssues.insertIssues(this.importBeans);    
-    } catch (SQLException ex) {
-      Logger.getLogger(AppLogging.LOG_NAME).log(Level.SEVERE, null , ex);
+
+    /**
+     * データ配列からテーブルにデータを登録する
+     */
+    @Override
+    public void buildUpData() {
+        log.info(TrnWorkedBuilder.class.getName() + "データ登録処理開始");
+        this.prepareImportBeansFromFile();
+        TransactionManager tm = AppConfig.singleton().getTransactionManager();
+        TrnWorkedDao trnWorkedDao = new TrnWorkedDaoImpl();
+
+        tm.required(() -> {
+            for (TrnWorked trnWorked : this.trnWorkedList) {
+                trnWorkedDao.insert(trnWorked);
+            }
+        });
     }
-  }
 }

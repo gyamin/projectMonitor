@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'maven'
 
 configurations {
     domaGenRuntime
@@ -23,7 +24,7 @@ def loadProperties(filename) {
 }
 
 task gen << {
-    def props = loadProperties("$rootDir/src/main/resources/jdbc-postgre.properties")
+    def props = loadProperties("$rootDir/src/main/resources/jdbc-postgres.properties")
 
     ant.taskdef(resource: 'domagentask.properties',
             classpath: configurations.domaGenRuntime.asPath)

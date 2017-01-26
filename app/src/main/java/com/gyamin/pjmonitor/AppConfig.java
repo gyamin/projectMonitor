@@ -2,7 +2,8 @@ package com.gyamin.pjmonitor;
 
 import javax.sql.DataSource;
 
-import com.gyamin.pjmonitor.config.PostgreConfig;
+import com.gyamin.pjmonitor.config.PostgresConfig;
+import com.gyamin.pjmonitor.config.RedisConfig;
 import org.seasar.doma.SingletonConfig;
 import org.seasar.doma.jdbc.Config;
 import org.seasar.doma.jdbc.dialect.Dialect;
@@ -29,13 +30,12 @@ public class AppConfig implements Config {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("jdbc-postgre.xml");
-        PostgreConfig postgreConfig = ctx.getBean(PostgreConfig.class);
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("jdbc-postgres.xml");
+        PostgresConfig postgresConfig = ctx.getBean(PostgresConfig.class);
 
         dialect = new PostgresDialect();
         dataSource = new LocalTransactionDataSource(
-                postgreConfig.getUrl(), postgreConfig.getUser(), postgreConfig.getPassword());
+                postgresConfig.getUrl(), postgresConfig.getUsername(), postgresConfig.getPassword());
         transactionManager = new LocalTransactionManager(
                 dataSource.getLocalTransaction(getJdbcLogger()));
     }

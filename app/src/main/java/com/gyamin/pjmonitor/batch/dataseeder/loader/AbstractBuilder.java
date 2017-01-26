@@ -1,6 +1,5 @@
 package com.gyamin.pjmonitor.batch.dataseeder.loader;
 
-import common.AppConfig;
 
 /**
  * データベーステーブルへのデータセットアップ抽象クラス

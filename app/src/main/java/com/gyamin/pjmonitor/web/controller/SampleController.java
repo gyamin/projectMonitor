@@ -1,4 +1,4 @@
-package com.gyamin.pjmonitor.web.controller.handler;
+package com.gyamin.pjmonitor.web.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -66,67 +66,67 @@ public class SampleController {
      * セッション作成サンプル
      * @return
      */
-    @RequestMapping(value = "/test_make_session2", method = GET, produces = "application/json;charset=utf-8")
-    @ResponseBody
-    public Object makeSession2(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ApplicationException {
-        String text;
-        String sessionId = "";
-
-        Cookie cookies[] = httpServletRequest.getCookies();
-        if(cookies != null){
-            for(int i = 0; i < cookies.length; i++){
-                if(cookies[i].getName().equals("session_id")){
-                    sessionId = cookies[i].getValue();
-                }
-            }
-        }
-
-        if(sessionId.length() == 0) {
-            text = "session_idがcookieに存在しないので作成します。";
-            sessionId = UUID.randomUUID().toString();
-        }else{
-            text = "session_idがcookieに存在しました。" + sessionId;
-        }
-
-        httpServletResponse.addCookie(new Cookie("session_id", sessionId));
-        return new ResponseEntity<String>(text, HttpStatus.OK);
-    }
+//    @RequestMapping(value = "/test_make_session2", method = GET, produces = "application/json;charset=utf-8")
+//    @ResponseBody
+//    public Object makeSession2(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ApplicationException {
+//        String text;
+//        String sessionId = "";
+//
+//        Cookie cookies[] = httpServletRequest.getCookies();
+//        if(cookies != null){
+//            for(int i = 0; i < cookies.length; i++){
+//                if(cookies[i].getName().equals("session_id")){
+//                    sessionId = cookies[i].getValue();
+//                }
+//            }
+//        }
+//
+//        if(sessionId.length() == 0) {
+//            text = "session_idがcookieに存在しないので作成します。";
+//            sessionId = UUID.randomUUID().toString();
+//        }else{
+//            text = "session_idがcookieに存在しました。" + sessionId;
+//        }
+//
+//        httpServletResponse.addCookie(new Cookie("session_id", sessionId));
+//        return new ResponseEntity<String>(text, HttpStatus.OK);
+//    }
 
     /**
      * セッションクリアサンプル
      * @return
      */
-    @RequestMapping(value = "/test_remove_session2", method = DELETE, produces = "application/json;charset=utf-8")
-    @ResponseBody
-    public Object removeSession2(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        String text;
-        String sessionId = "";
-
-        Cookie cookies[] = httpServletRequest.getCookies();
-        if(cookies != null){
-            for(int i = 0; i < cookies.length; i++){
-                if(cookies[i].getName().equals("session_id")){
-                    sessionId = cookies[i].getValue();
-                }
-            }
-        }
-
-        if(sessionId.length() == 0) {
-            text = "session_idがcookieに存在しないので何もしません。";
-        }else{
-            text = "session_id" +  sessionId + "を削除します。";
-        }
-
-        if(cookies != null){
-            for(int i = 0; i < cookies.length; i++){
-                if(cookies[i].getName().equals("session_id")){
-                    cookies[i].setMaxAge(0);
-                    httpServletResponse.addCookie(cookies[i]);
-                }
-            }
-        }
-
-        return new ResponseEntity<String>(text, HttpStatus.OK);
-    }
+//    @RequestMapping(value = "/test_remove_session2", method = DELETE, produces = "application/json;charset=utf-8")
+//    @ResponseBody
+//    public Object removeSession2(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+//        String text;
+//        String sessionId = "";
+//
+//        Cookie cookies[] = httpServletRequest.getCookies();
+//        if(cookies != null){
+//            for(int i = 0; i < cookies.length; i++){
+//                if(cookies[i].getName().equals("session_id")){
+//                    sessionId = cookies[i].getValue();
+//                }
+//            }
+//        }
+//
+//        if(sessionId.length() == 0) {
+//            text = "session_idがcookieに存在しないので何もしません。";
+//        }else{
+//            text = "session_id" +  sessionId + "を削除します。";
+//        }
+//
+//        if(cookies != null){
+//            for(int i = 0; i < cookies.length; i++){
+//                if(cookies[i].getName().equals("session_id")){
+//                    cookies[i].setMaxAge(0);
+//                    httpServletResponse.addCookie(cookies[i]);
+//                }
+//            }
+//        }
+//
+//        return new ResponseEntity<String>(text, HttpStatus.OK);
+//    }
 
 }

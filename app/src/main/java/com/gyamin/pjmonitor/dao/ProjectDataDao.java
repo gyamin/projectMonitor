@@ -11,7 +11,7 @@ public interface ProjectDataDao {
 
     /**
      * @param id
-     * @return the SagyouJikanShukei entity
+     * @return
      */
     @Select
     TrnWorked selectByProjectId(Long id);

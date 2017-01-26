@@ -41,29 +41,29 @@ public class ProjectDataController {
 //    /distディレクトリからリソースとして配信。サーバサイドはAPIのみを実装するSPA構成にする
 //    *******************************************
 
-    /**
-     * 処理
-     * @param request
-     * @param bindingResult
-     * @return
-     * @throws ValidateException
-     */
-    @RequestMapping(value = "/project_data", method = GET, consumes= MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
-    @ResponseBody
-    public Object getProjectData(@RequestBody @Valid ProjectDataRequest request, BindingResult bindingResult)
-            throws ApplicationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, JsonProcessingException {
-        // リクエストバリデーション
-        if(bindingResult.hasErrors()) {
-            ValidateException validateException = new ValidateException("バリデーションエラー");
-            validateException.errors = bindingResult.getFieldErrors();
-            throw validateException;
-        }
-        // プロジェクトデータ取得処理を行う
-        ProjectDataService service = new ProjectDataService();
-        String sessionInfo = service.getProjectData(request.getProjectId());
-
-        return new ResponseEntity<String>(sessionInfo, HttpStatus.OK);
-    }
+//    /**
+//     * 処理
+//     * @param request
+//     * @param bindingResult
+//     * @return
+//     * @throws ValidateException
+//     */
+//    @RequestMapping(value = "/project_data", method = GET, consumes= MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
+//    @ResponseBody
+//    public Object getProjectData(@RequestBody @Valid ProjectDataRequest request, BindingResult bindingResult)
+//            throws ApplicationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, JsonProcessingException {
+//        // リクエストバリデーション
+//        if(bindingResult.hasErrors()) {
+//            ValidateException validateException = new ValidateException("バリデーションエラー");
+//            validateException.errors = bindingResult.getFieldErrors();
+//            throw validateException;
+//        }
+//        // プロジェクトデータ取得処理を行う
+//        ProjectDataService service = new ProjectDataService();
+//        String sessionInfo = service.getProjectData(request.getProjectId());
+//
+//        return new ResponseEntity<String>(sessionInfo, HttpStatus.OK);
+//    }
 
     /**
      * アプリケーションエラー時レスポンス処理
