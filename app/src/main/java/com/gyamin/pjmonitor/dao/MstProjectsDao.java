@@ -8,6 +8,8 @@ import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
 
+import java.util.ArrayList;
+
 /**
  */
 @Dao(config = AppConfig.class)
@@ -19,6 +21,12 @@ public interface MstProjectsDao {
      */
     @Select
     MstProjects selectById(Long id);
+
+    /**
+     * @return the MstProjects entities
+     */
+    @Select
+    ArrayList<MstProjects> selectAll();
 
     /**
      * @param entity

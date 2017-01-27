@@ -1,42 +1,36 @@
 package com.gyamin.pjmonitor.batch.dataseeder.csvreader;
 
+import com.gyamin.pjmonitor.entity.TrnProjectOrders;
+import com.gyamin.pjmonitor.entity.TrnWorked;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import com.gyamin.pjmonitor.entity.TrnWorked;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- *  SagyouJikanShukei.csvを読み込み、作業実績データをオブジェクト化しリターンする
+ *  Anken.csvを読み込み、受注データをオブジェクト化しリターンする
  * @author gyamin
  */
-public class SagyouJikanShukei {
-    static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(SagyouJikanShukei.class.getName());
+public class Anken {
+    static org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Anken.class.getName());
 
     // 取り込みCSVファイル
-    private final String fileName = "SagyouJikanShukei.csv";
+    private final String fileName = "Anken.csv";
 
-    /**
-     *  SagyouJikanShukei.csvを読み込み、銘柄オブジェクト配列を作成し、リターンする
-     */
-    public ArrayList<TrnWorked> getImportBeansFromFile(boolean skipFirstLine) {
+
+    public ArrayList<TrnProjectOrders> getImportBeansFromFile(boolean skipFirstLine) {
         FileReader file = null;
         try {
             file = new FileReader(System.getProperty("user.dir") + "/design/seeds/" + fileName);
             BufferedReader br = new BufferedReader(file);
             String line;
-            ArrayList<TrnWorked> trnWorkedList = new ArrayList<>();
+            ArrayList<TrnProjectOrders> trnProjectOrdersList = new ArrayList<>();
             while((line = br.readLine()) != null) {
                 if(skipFirstLine == true) {
                     skipFirstLine = false;
@@ -44,23 +38,27 @@ public class SagyouJikanShukei {
                 }
                 // ,区切りで文字列を配列に格納
                 String[] cols = line.split(",");
-                TrnWorked trnWorked = new TrnWorked();
+
+                TrnProjectOrders trnProjectOrders = new TrnProjectOrders();
                 // TrnWorkedオブジェクトにCSV値を設定
-                trnWorked.setJobNo(cols[1]);
-                trnWorked.setWorkerId(Long.valueOf(cols[9]));
+                trnProjectOrders.setJobNo(cols[0]);
+                trnProjectOrders.setDepartmentId(Long.valueOf(cols[9]));
+                trnProjectOrders.setOrderName(cols[2]);
+                trnProjectOrders.setSalesWorkersId(Long.valueOf(cols[5]));
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/M/d");
-                trnWorked.setWorkDate(LocalDate.parse(cols[11], formatter));
+                if(! cols[24].equals("")) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/M/d");
+                    trnProjectOrders.setOrderedDate(LocalDate.parse(cols[24], formatter));
+                }
 
-                trnWorked.setWorkHours((new BigDecimal(cols[16])));
-                trnWorked.setWorkType(cols[5]);
+                trnProjectOrders.setOrderedVolume(Long.valueOf(cols[34]));
 
                 LocalDateTime sysDate = LocalDateTime.now();
-                trnWorked.setCreatedAt(sysDate);
+                trnProjectOrders.setCreatedAt(sysDate);
 
-                trnWorkedList.add(trnWorked);
+                trnProjectOrdersList.add(trnProjectOrders);
             }
-            return trnWorkedList;
+            return trnProjectOrdersList;
 
         } catch (FileNotFoundException ex) {
             String msg = this.fileName + " が存在しません。";

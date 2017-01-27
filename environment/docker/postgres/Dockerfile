@@ -12,7 +12,7 @@ USER postgres
 # Start PostgeSQL
 RUN /etc/init.d/postgresql start &&\
     psql --command "CREATE USER admin WITH SUPERUSER PASSWORD 'adminPwd';" &&\
-    createdb -O admin pjmonitor
+    createdb -O admin pjmonitor --encoding='utf-8' --template=template0
 
 # Config file deploy
 ADD pg_hba.conf /etc/postgresql/9.4/main/pg_hba.conf

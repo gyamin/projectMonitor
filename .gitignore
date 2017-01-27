@@ -1,1 +1,4 @@
 .idea
+!design/seeds/.gitkeep
+design/seeds
+design/database/ERMaster/.metadata
