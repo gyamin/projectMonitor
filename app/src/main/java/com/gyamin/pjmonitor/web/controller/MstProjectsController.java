@@ -1,11 +1,13 @@
 package com.gyamin.pjmonitor.web.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.gyamin.pjmonitor.web.bean.ErrorResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gyamin.pjmonitor.entity.MstProjects;
+import com.gyamin.pjmonitor.service.MstProjectsService;
+import com.gyamin.pjmonitor.web.bean.ErrorResponseBean;
 import com.gyamin.pjmonitor.web.exception.ApplicationException;
 import com.gyamin.pjmonitor.web.exception.ValidateException;
 import com.gyamin.pjmonitor.web.request.ProjectDataRequest;
-import com.gyamin.pjmonitor.service.ProjectDataService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,45 +27,28 @@ import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-@Controller
-public class ProjectDataController {
+@RestController
+public class MstProjectsController {
 
     /**
-     * ログイン画面表示
+     * 処理
      * @return
+     * @throws ValidateException
      */
-//    @RequestMapping(value = "/login", method = GET)
-//    public String loginIndex() {
-//        return "login/index";
-//    }
-//    *******************************************
-//    画面表示などの静的コンテンツは/dist/html/login/index.html のように
-//    /distディレクトリからリソースとして配信。サーバサイドはAPIのみを実装するSPA構成にする
-//    *******************************************
+    @RequestMapping(value = "/api/mst_projects", method = GET, produces = "application/json")
+    public Object index(@RequestParam(required = false) String projectNo)
+            throws ApplicationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, JsonProcessingException {
 
-//    /**
-//     * 処理
-//     * @param request
-//     * @param bindingResult
-//     * @return
-//     * @throws ValidateException
-//     */
-//    @RequestMapping(value = "/project_data", method = GET, consumes= MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
-//    @ResponseBody
-//    public Object getProjectData(@RequestBody @Valid ProjectDataRequest request, BindingResult bindingResult)
-//            throws ApplicationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, JsonProcessingException {
-//        // リクエストバリデーション
-//        if(bindingResult.hasErrors()) {
-//            ValidateException validateException = new ValidateException("バリデーションエラー");
-//            validateException.errors = bindingResult.getFieldErrors();
-//            throw validateException;
-//        }
-//        // プロジェクトデータ取得処理を行う
-//        ProjectDataService service = new ProjectDataService();
-//        String sessionInfo = service.getProjectData(request.getProjectId());
-//
-//        return new ResponseEntity<String>(sessionInfo, HttpStatus.OK);
-//    }
+        // プロジェクトデータ取得処理を行う
+        MstProjectsService service = new MstProjectsService();
+        List<MstProjects> mstProjectsList = service.getMstProjectsData();
+
+        // JSON文字列へ変換
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonSessionInfo = mapper.writeValueAsString(mstProjectsList);
+
+        return new ResponseEntity<String>(jsonSessionInfo, HttpStatus.OK);
+    }
 
     /**
      * アプリケーションエラー時レスポンス処理
@@ -73,8 +58,8 @@ public class ProjectDataController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({ ApplicationException.class })
     @ResponseBody
-    public ErrorResponse applicatinError(ApplicationException exception) {
-        ErrorResponse errorResponse = new ErrorResponse();
+    public ErrorResponseBean applicationError(ApplicationException exception) {
+        ErrorResponseBean errorResponse = new ErrorResponseBean();
         errorResponse.setMessage(exception.getMessage());
         return errorResponse;
     }
@@ -87,8 +72,8 @@ public class ProjectDataController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({ ValidateException.class })
     @ResponseBody
-    public ErrorResponse validateError(ValidateException exception) {
-        ErrorResponse errorResponse = new ErrorResponse();
+    public ErrorResponseBean validateError(ValidateException exception) {
+        ErrorResponseBean errorResponse = new ErrorResponseBean();
 
         List<Map<String,Object>> errorList = new ArrayList();
         for(ObjectError error : exception.errors ) {

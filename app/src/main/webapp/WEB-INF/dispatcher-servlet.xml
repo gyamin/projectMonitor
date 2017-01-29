@@ -12,19 +12,25 @@
             http://www.springframework.org/schema/mvc/spring-mvc.xsd
         ">
 
+    <!-- viewページのディレクトリ設定(コントローラのreturnで静的ページをレスポンスする場合に利用) -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
     <!-- @Autowired を利用して依存関係を注入できるよう、component-scanでパッケージを指定-->
     <context:component-scan base-package="com.gyamin.pjmonitor.web.controller" />
     <context:component-scan base-package="com.gyamin.pjmonitor.service" />
     <context:component-scan base-package="com.gyamin.pjmonitor.web.bean" />
     <context:component-scan base-package="com.gyamin.web.session" />
 
-    <!-- 以下の設定の場合、http://hostname/stocktrace/dist/html/index.html で webapp/app/dist/html/index.htmlにアクセスできる-->
-    <mvc:resources mapping="/**" location="/app/" />
+    <!-- 以下の設定の場合、http://hostname/pjmonitor/dist/html/index.html で webapp/app/dist/html/index.htmlにアクセスできる-->
+    <!--<mvc:resources mapping="/**" location="/app/" />-->
 
-    <!-- 以下の設定の場合、http://hostname/stocktrace/html/index.html で webapp/app/dist/html/index.htmlにアクセスできる-->
-    <!--<mvc:resources mapping="/**" location="/app/dist/" />-->
+    <!-- 以下の設定の場合、http://hostname/pjmonitor/html/index.html で webapp/app/dist/html/index.htmlにアクセスできる-->
+    <mvc:resources mapping="/**" location="/app/dist/" />
 
-    <!-- 以下の設定の場合、http://hostname/stocktrace/public/html/index.html で webapp/app/dist/html/index.htmlにアクセスできる-->
+    <!-- 以下の設定の場合、http://hostname/pjmonitor/public/html/index.html で webapp/app/dist/html/index.htmlにアクセスできる-->
     <!--<mvc:resources mapping="/public/**" location="/app/dist/" />-->
 
     <mvc:annotation-driven />

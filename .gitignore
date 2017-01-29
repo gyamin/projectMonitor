@@ -1,4 +1,5 @@
 .idea
 !design/seeds/.gitkeep
 design/seeds
-design/database/ERMaster/.metadata
+design/database/ERMaster/pjmonitor/.metadata
+design/database/ERMaster/pjmonitor/.project

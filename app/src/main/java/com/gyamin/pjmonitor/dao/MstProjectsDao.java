@@ -8,7 +8,7 @@ import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  */
@@ -26,7 +26,7 @@ public interface MstProjectsDao {
      * @return the MstProjects entities
      */
     @Select
-    ArrayList<MstProjects> selectAll();
+    List<MstProjects> selectAll();
 
     /**
      * @param entity

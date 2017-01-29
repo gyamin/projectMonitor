@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>プロジェクトマスタ</title>
+</head>
+<body>
+</body>
+  <main id="v-mst-projects">
+    <div>
+      <ul>
+        <li><button v-on:click="searchProjects">検索</button></li>
+      </ul>
+    </div>
+    <div>
+      <table>
+        <thead>
+        <tr>
+          <td>プロジェクトNo</td>
+          <td>プロジェクト名</td>
+          <td>営業担当者</td>
+          <td>担当PL</td>
+          <td>PJ開始予定日</td>
+          <td>PJ終了予定日</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in projects">
+          <td>{{ item.message }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.js"
+        integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+        crossorigin="anonymous"></script>
+<script src="/js/mst_projects/index.js"></script>
+</html>

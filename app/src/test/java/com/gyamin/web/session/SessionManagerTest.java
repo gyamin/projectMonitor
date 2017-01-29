@@ -1,19 +1,17 @@
 package com.gyamin.web.session;
 
-import com.gyamin.pjmonitor.web.controller.SampleController;
-import org.junit.Before;
-import org.junit.Test;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import javax.servlet.http.Cookie;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
+import org.junit.Before;
+import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.hamcrest.CoreMatchers.*;
+import javax.servlet.http.Cookie;
+import com.gyamin.pjmonitor.web.controller.SampleController;
 
 public class SessionManagerTest {
 
@@ -49,5 +47,4 @@ public class SessionManagerTest {
         result = mvc.perform(get("/get_session").cookie(this.cookie)).andReturn();
         assertThat(result.getResponse().getContentAsString(), is("{\"param1\":\"12345\"}"));
     }
-
 }

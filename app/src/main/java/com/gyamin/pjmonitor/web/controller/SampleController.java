@@ -21,6 +21,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @Controller
 public class SampleController {
 
+    /**
+     * ログイン画面表示
+     * @return
+     */
+    @RequestMapping(value = "/test", method = GET)
+    public String index() {
+        return "test";
+    }
 
     /**
      * セッション開始サンプル
