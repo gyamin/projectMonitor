@@ -1,4 +1,5 @@
 .idea
+target
 !design/seeds/.gitkeep
 design/seeds
 design/database/ERMaster/pjmonitor/.metadata

@@ -36,7 +36,7 @@ public class MstProjectsController {
      * @return
      * @throws ValidateException
      */
-    @RequestMapping(value = "/api/mst_projects", method = GET, produces = "application/json")
+    @RequestMapping(value = "/api/mst_projects", method = GET, produces = "application/json;charset=utf-8")
     public Object index(@RequestParam(required = false) String projectNo)
             throws ApplicationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, JsonProcessingException {
 
