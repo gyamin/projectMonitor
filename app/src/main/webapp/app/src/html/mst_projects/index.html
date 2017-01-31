@@ -30,7 +30,12 @@
         </thead>
         <tbody>
         <tr v-for="item in projects">
-          <td>{{ item.message }}</td>
+          <td>{{item.projectNo}}</td>
+          <td>{{item.projectName}}</td>
+          <td>{{item.salesWorkerFamilyName}}{{item.salesWorkerFirstName}}</td>
+          <td>{{item.plWorkerFamilyName}}{{item.plWorkerFirstName}}</td>
+          <td>{{item.scheduledStartDate}}</td>
+          <td>{{item.scheduledEndDate}}</td>
         </tr>
         </tbody>
       </table>

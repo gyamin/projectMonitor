@@ -10,7 +10,7 @@ namespace MstProjects.Index {
         var that = this;
         $.ajax({
           type: "GET",
-          url: "http://localhost:8102/api/mst_projects",
+          url: "/api/mst_projects",
           dataType: "json",
           success: function(data) {
             that.projects = data;
