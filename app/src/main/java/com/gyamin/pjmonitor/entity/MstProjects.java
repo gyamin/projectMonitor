@@ -11,7 +11,7 @@ import org.seasar.doma.Table;
 
 /**
  */
-@Entity(listener = MstProjectsListener.class)
+@Entity
 @Table(name = "mst_projects")
 public class MstProjects {
 

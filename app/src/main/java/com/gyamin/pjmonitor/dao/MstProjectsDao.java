@@ -2,6 +2,7 @@ package com.gyamin.pjmonitor.dao;
 
 import com.gyamin.pjmonitor.AppConfig;
 import com.gyamin.pjmonitor.entity.MstProjects;
+import com.gyamin.pjmonitor.entity.MstProjectsWorkers;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
@@ -26,7 +27,7 @@ public interface MstProjectsDao {
      * @return the MstProjects entities
      */
     @Select
-    List<MstProjects> selectAll();
+    List<MstProjectsWorkers> selectAll();
 
     /**
      * @param entity

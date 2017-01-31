@@ -3,6 +3,7 @@ package com.gyamin.pjmonitor.web.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gyamin.pjmonitor.entity.MstProjects;
+import com.gyamin.pjmonitor.entity.MstProjectsWorkers;
 import com.gyamin.pjmonitor.service.MstProjectsService;
 import com.gyamin.pjmonitor.web.bean.ErrorResponseBean;
 import com.gyamin.pjmonitor.web.exception.ApplicationException;
@@ -41,7 +42,7 @@ public class MstProjectsController {
 
         // プロジェクトデータ取得処理を行う
         MstProjectsService service = new MstProjectsService();
-        List<MstProjects> mstProjectsList = service.getMstProjectsData();
+        List<MstProjectsWorkers> mstProjectsList = service.getMstProjectsData();
 
         // JSON文字列へ変換
         ObjectMapper mapper = new ObjectMapper();
