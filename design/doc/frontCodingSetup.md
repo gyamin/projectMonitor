@@ -19,11 +19,10 @@ use v6.9.4
 ```bash
 $ npm install -g typescript
 $ npm install -g http-server --save
+$ npm install @types/jquery --save
+$ npm install @types/vue --save
 $ npm install watch --save
-$ npm install vue --save
 $ npm install node-sass --save
-$ npm install http-proxy --save
-$ npm install http-proxy-rules --save
 ```
 
 ## 開発 

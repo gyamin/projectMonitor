@@ -9,37 +9,37 @@
           crossorigin="anonymous"></script>
 </head>
 <body>
+<main id="v-mst-projects">
+  <div>
+    <ul>
+      <li><button v-on:click="searchProjects">検索</button></li>
+    </ul>
+  </div>
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <td>プロジェクトNo</td>
+        <td>プロジェクト名</td>
+        <td>営業担当者</td>
+        <td>担当PL</td>
+        <td>PJ開始予定日</td>
+        <td>PJ終了予定日</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="item in projects">
+        <td>{{item.projectNo}}</td>
+        <td>{{item.projectName}}</td>
+        <td>{{item.salesWorkerFamilyName}}{{item.salesWorkerFirstName}}</td>
+        <td>{{item.plWorkerFamilyName}}{{item.plWorkerFirstName}}</td>
+        <td>{{item.scheduledStartDate}}</td>
+        <td>{{item.scheduledEndDate}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+<script src="/js/app.js"></script>
 </body>
-  <main id="v-mst-projects">
-    <div>
-      <ul>
-        <li><button v-on:click="searchProjects">検索</button></li>
-      </ul>
-    </div>
-    <div>
-      <table>
-        <thead>
-        <tr>
-          <td>プロジェクトNo</td>
-          <td>プロジェクト名</td>
-          <td>営業担当者</td>
-          <td>担当PL</td>
-          <td>PJ開始予定日</td>
-          <td>PJ終了予定日</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="item in projects">
-          <td>{{item.projectNo}}</td>
-          <td>{{item.projectName}}</td>
-          <td>{{item.salesWorkerFamilyName}}{{item.salesWorkerFirstName}}</td>
-          <td>{{item.plWorkerFamilyName}}{{item.plWorkerFirstName}}</td>
-          <td>{{item.scheduledStartDate}}</td>
-          <td>{{item.scheduledEndDate}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </main>
-<script src="/js/mst_projects/index.js"></script>
 </html>

@@ -1,4 +1,3 @@
-/// <reference path="./../common/config.ts"/>
 namespace Common {
 
     // Log level list
@@ -10,31 +9,28 @@ namespace Common {
     }
 
     export class Logger {
+        private logLevel = LogLevel.debug;
 
         debug(message: string) :void {
-            var logLevel = Common.Config.LOG_LEVEL;
-            if(logLevel >= LogLevel.debug) {
+            if(this.logLevel >= LogLevel.debug) {
                 console.log(message);
             }
         }
 
         info(message: string) :void {
-            var logLevel = Common.Config.LOG_LEVEL;
-            if(logLevel >= LogLevel.info) {
+            if(this.logLevel >= LogLevel.info) {
                 console.log(message);
             }
         }
 
         warning(message: string) :void {
-            var logLevel = Common.Config.LOG_LEVEL;
-            if(logLevel >= LogLevel.warning) {
+            if(this.logLevel >= LogLevel.warning) {
                 console.log(message);
             }
         }
 
         error(message: string) :void {
-            var logLevel = Common.Config.LOG_LEVEL;
-            if(logLevel >= LogLevel.error) {
+            if(this.logLevel >= LogLevel.error) {
                 console.log(message);
             }
         }
