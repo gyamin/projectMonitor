@@ -6,7 +6,9 @@
         "sourceMap": true,
 //        "outDir": "./../resources/js",
         "outFile": "./dist/js/app.js",
-        "rootDir": "./src/js/"
+        "rootDir": "./src/js/",
+        "typeRoots": [ "node_modules/@types/", "node_modules/@types/vue/node_modules/types" ],
+        "types": [ "jquery", "vue"]
     },
     "exclude": [
 //        "node_modules"

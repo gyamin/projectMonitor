@@ -1,29 +1,27 @@
-namespace MstProjects.Index {
+import * as Vue from './../../../node_modules/@types/vue/node_modules/vue/types/index';
 
-    var app = new Vue({
-        el: '#v-mst-projects',
-        data: {
-            projects: []
-        },
-        methods: {
-            searchProjects: function (event) {
-                var that = this;
-                $.ajax({
-                    type: "GET",
-                    url: "/api/mst_projects",
-                    dataType: "json",
-                    success: function (projects) {
-                        for (let project in projects) {
-                            console.log(project);
-                        }
-                        that.projects = projects;
+namespace MstProjects {
 
-                    },
-                    error: function (error) {
-                        alert(JSON.stringify(error));
-                    }
-                });
-            }
+    class IndexApp extends Vue {
+
+        constructor() {
+            super(false);
+            this._init({
+                el: '#v-mst-projects',
+                data: {
+                    projects: []
+                },
+                methods: {
+                    searchProjects: this.searchProjects;
+                }
+            });
         }
-    })
+
+        public searchProjects() {
+            $.ajax()
+        }
+    }
+
+    export var indexApp = new IndexApp();
+
 }
