@@ -17,15 +17,17 @@ use v6.9.4
 
 ## 開発に依存するnpmパッケージのインストール
 ```bash
-$ npm install -g typescript
-$ npm install -g http-server --save
-$ npm install @types/jquery --save
-$ npm install @types/vue --save
-$ npm install watch --save
-$ npm install node-sass --save
+
+$ npm install watch --save-dev
+$ npm install node-sass --save-dev
+$ npm install babel-cli --save-dev
 ```
 
 ## 開発 
+
+
+
+
 
 ### http-serverによるコンテンツ配信
 http-serverで静的コンテンツを配信する。

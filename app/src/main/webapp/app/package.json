@@ -5,26 +5,25 @@
   "main": "index.js",
   "scripts": {
     "clean": "bin/clean.sh",
-    "build:ts": "bin/build_ts.sh",
-    "watch:ts": "bin/build_ts.sh watch",
+    "build:js": "bin/build_js.sh",
+    "watch:js": "bin/build_js.sh watch",
     "build:sass": "bin/build_sass.sh",
     "watch:sass": "bin/build_sass.sh watch",
     "build:html": "bin/deploy_html.sh",
     "watch:html": "bin/deploy_html.sh watch",
-    "build:all": "npm run build:ts & npm run build:sass & npm run build:html",
-    "watch:all": "npm run watch:ts & npm run watch:sass & npm run watch:html",
-    "start:server": "http-server ./dist -p 8101"
+    "build:all": "npm run build:js & npm run build:sass & npm run build:html",
+    "watch:all": "npm run watch:js & npm run watch:sass & npm run watch:html"
   },
   "author": "gyamin",
   "license": "ISC",
   "repository": "https://github.com/gyamin/projectMonitor.git",
   "dependencies": {
-    "@types/jquery": "^2.0.40",
-    "@types/vue": "^2.0.0",
-    "http-proxy": "^1.16.2",
-    "node-sass": "^4.5.0",
-    "vue": "^2.1.10",
     "watch": "^1.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-preset-env": "^1.1.8",
+    "node-sass": "^4.5.0",
+    "watch": "^1.0.1"
+  }
 }
