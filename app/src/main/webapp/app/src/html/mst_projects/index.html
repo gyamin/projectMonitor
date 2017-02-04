@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>プロジェクトマスタ</title>
+  <title>プロジェクトマスタ 一覧</title>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://code.jquery.com/jquery-3.1.1.js"
           integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
@@ -25,6 +25,7 @@
         <td>担当PL</td>
         <td>PJ開始予定日</td>
         <td>PJ終了予定日</td>
+        <td>操作</td>
       </tr>
       </thead>
       <tbody>
@@ -35,6 +36,7 @@
         <td>{{item.plWorkerFamilyName}}{{item.plWorkerFirstName}}</td>
         <td>{{item.scheduledStartDate}}</td>
         <td>{{item.scheduledEndDate}}</td>
+        <td><button>編集</button><button>削除</button></td>
       </tr>
       </tbody>
     </table>

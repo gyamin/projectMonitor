@@ -9,6 +9,16 @@ class MstProjectsModel {
     });
     return defer.promise();
   }
+
+  shapeList (list) {
+    let shapedList = [];
+    Object.keys(list).forEach((key) => {
+      list[key].scheduledStartDate = (new DateUtil(list[key].scheduledStartDate).getDateWithFormat())
+      list[key].scheduledEndDate = (new DateUtil(list[key].scheduledEndDate).getDateWithFormat())
+      shapedList.push(list[key]);
+    });
+    return shapedList;
+  }
 }
 
 var model = new MstProjectsModel();
@@ -21,7 +31,7 @@ var app = new Vue({
     getProjects: () => {
       model.getProjects().done( (data) => {
         console.log(data);
-        app.items = data;
+        app.items = model.shapeList(data);
       })
     }
   }
