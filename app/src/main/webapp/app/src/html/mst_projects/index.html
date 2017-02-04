@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>プロジェクトマスタ</title>
-  <!--<script src="https://unpkg.com/vue/dist/vue.js"></script>-->
-  <!--<script src="https://code.jquery.com/jquery-3.1.1.js"-->
-          <!--integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="-->
-          <!--crossorigin="anonymous"></script>-->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.js"
+          integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+          crossorigin="anonymous"></script>
 </head>
 <body>
-<main id="v-mst-projects">
+<main id="app">
   <div>
     <ul>
-      <li><button v-on:click="searchProjects">検索</button></li>
+      <li><button v-on:click="getProjects">検索</button></li>
     </ul>
   </div>
   <div>
@@ -28,7 +28,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="item in projects">
+      <tr v-for="item in items">
         <td>{{item.projectNo}}</td>
         <td>{{item.projectName}}</td>
         <td>{{item.salesWorkerFamilyName}}{{item.salesWorkerFirstName}}</td>
