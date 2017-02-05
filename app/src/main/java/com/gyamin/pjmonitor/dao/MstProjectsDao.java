@@ -24,10 +24,17 @@ public interface MstProjectsDao {
     MstProjects selectById(Long id);
 
     /**
+     * @param id
+     * @return the MstProjects entity
+     */
+    @Select
+    MstProjectsWorkers selectJoinedById(Long id);
+
+    /**
      * @return the MstProjects entities
      */
     @Select
-    List<MstProjectsWorkers> selectAll();
+    List<MstProjectsWorkers> selectJoinedAll();
 
     /**
      * @param entity

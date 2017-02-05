@@ -4,11 +4,23 @@
   <meta charset="UTF-8">
   <title>プロジェクトマスタ 編集</title>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="https://code.jquery.com/jquery-3.1.1.js"
           integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
           crossorigin="anonymous"></script>
 </head>
 <body>
-
+  <main id="app">
+    <div>
+      <ul>
+        <label>プロジェクトNo</label><li>{{item.projectNo}}</li>
+        <li>{{item.projectName}}</li>
+        <li>{{item.salesWorkerFamilyName}}{{item.salesWorkerFirstName}}</li>
+        <li>{{item.plWorkerFamilyName}}{{item.plWorkerFirstName}}</li>
+        <li>{{item.scheduledStartDate}}</li>
+        <li>{{item.scheduledEndDate}}</li>
+      </ul>
+    </div>
+  </main>
 </body>
 </html>

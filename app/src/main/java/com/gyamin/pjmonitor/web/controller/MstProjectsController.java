@@ -1,90 +1,66 @@
 package com.gyamin.pjmonitor.web.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gyamin.pjmonitor.AppConfig;
+import com.gyamin.pjmonitor.dao.MstProjectsDao;
+import com.gyamin.pjmonitor.dao.MstProjectsDaoImpl;
 import com.gyamin.pjmonitor.entity.MstProjects;
 import com.gyamin.pjmonitor.entity.MstProjectsWorkers;
 import com.gyamin.pjmonitor.service.MstProjectsService;
-import com.gyamin.pjmonitor.web.bean.ErrorResponseBean;
 import com.gyamin.pjmonitor.web.exception.ApplicationException;
-import com.gyamin.pjmonitor.web.exception.ValidateException;
-import com.gyamin.pjmonitor.web.request.ProjectDataRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.seasar.doma.jdbc.tx.TransactionManager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-@RestController
+@Controller
 public class MstProjectsController {
 
     /**
      * 処理
      * @return
-     * @throws ValidateException
      */
-    @RequestMapping(value = "/api/mst_projects", method = GET, produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/mst_projects", method = GET)
     public Object index(@RequestParam(required = false) String projectNo)
-            throws ApplicationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, JsonProcessingException {
+            throws ApplicationException, IllegalAccessException, NoSuchMethodException {
 
         // プロジェクトデータ取得処理を行う
         MstProjectsService service = new MstProjectsService();
         List<MstProjectsWorkers> mstProjectsList = service.getMstProjectsData();
 
-        // JSON文字列へ変換
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonSessionInfo = mapper.writeValueAsString(mstProjectsList);
+        ModelAndView model = new ModelAndView("mst_projects/index");
+        model.addObject("projects", mstProjectsList);
 
-        return new ResponseEntity<String>(jsonSessionInfo, HttpStatus.OK);
+        return model;
     }
 
     /**
-     * アプリケーションエラー時レスポンス処理
-     * @param exception
+     * 編集画面表示
      * @return
      */
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({ ApplicationException.class })
-    @ResponseBody
-    public ErrorResponseBean applicationError(ApplicationException exception) {
-        ErrorResponseBean errorResponse = new ErrorResponseBean();
-        errorResponse.setMessage(exception.getMessage());
-        return errorResponse;
+    @RequestMapping(value = "/mst_projects/edit/{id}", method = GET)
+    public Object edit(@PathVariable String id)
+            throws ApplicationException, IllegalAccessException, NoSuchMethodException {
+
+        TransactionManager tm = AppConfig.singleton().getTransactionManager();
+        MstProjectsDao dao = new MstProjectsDaoImpl();
+
+        // プロジェクトデータ取得処理を行う
+        MstProjectsWorkers mstProjectsWorkers = tm.required(() -> {
+            return dao.selectJoinedById(Long.parseLong(id));
+        });
+
+        ModelAndView model = new ModelAndView("mst_projects/edit");
+        model.addObject("item", mstProjectsWorkers);
+        return model;
     }
 
-    /**
-     * バリデーションエラー時レスポンス処理
-     * @param exception
-     * @return
-     */
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({ ValidateException.class })
-    @ResponseBody
-    public ErrorResponseBean validateError(ValidateException exception) {
-        ErrorResponseBean errorResponse = new ErrorResponseBean();
 
-        List<Map<String,Object>> errorList = new ArrayList();
-        for(ObjectError error : exception.errors ) {
-            Map<String, Object> info = new HashMap<String, Object>();
-            info.put("field", ((FieldError) error).getField());
-            info.put("message", ((FieldError) error).getDefaultMessage());
-            errorList.add(info);
-        }
-        errorResponse.setMessage(exception.getMessage());
-        errorResponse.setFieldErrors(errorList);
-        return errorResponse;
-    }
 }

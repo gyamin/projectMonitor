@@ -1,39 +1,40 @@
-class MstProjectsModel {
-  getProjects () {
-    var defer = $.Deferred();
-    $.ajax({
-      method: "GET",
-      url: "/api/mst_projects",
-      success: defer.resolve,
-      error: defer.reject
-    });
-    return defer.promise();
+require("./../common/date_util.js")
+var $ = require('jquery');
+
+class MstProjectsIndex {
+  constructor() {
+    this.init();
+  }
+  init() {
+    // 編集、削除ボタンにイベント設定
+    $('.btn-eidt').click(this.edit);
+    $('.btn-delete').click(this.delete);
   }
 
-  shapeList (list) {
-    let shapedList = [];
-    Object.keys(list).forEach((key) => {
-      list[key].scheduledStartDate = (new DateUtil(list[key].scheduledStartDate).getDateWithFormat())
-      list[key].scheduledEndDate = (new DateUtil(list[key].scheduledEndDate).getDateWithFormat())
-      shapedList.push(list[key]);
-    });
-    return shapedList;
+  edit() {
+    let id = $(this).data('id');
+    location.href = "/mst_projects/edit/" + id;
+  }
+
+  delete() {
+    let id = $(this).data('id');
+    if(!confirm('削除しますか？')){
+      return false;
+    }else{
+      $.ajax({
+        url: '/mst_projects/' + id,
+        type: 'DELETE',
+      })
+        .done(() => {
+          location.reload();
+      })
+        .fail(() => {
+
+        })
+    }
   }
 }
 
-var model = new MstProjectsModel();
-var app = new Vue({
-  el: '#app',
-  data: {
-    items: []
-  },
-  methods: {
-    getProjects: () => {
-      model.getProjects().done( (data) => {
-        console.log(data);
-        app.items = model.shapeList(data);
-      })
-    }
-  }
-});
+
+var index = new MstProjectsIndex();
 
