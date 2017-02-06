@@ -7,8 +7,13 @@ class MstProjectsIndex {
   }
   init() {
     // 編集、削除ボタンにイベント設定
+    $('.btn-new').click(this.new);
     $('.btn-eidt').click(this.edit);
     $('.btn-delete').click(this.delete);
+  }
+
+  new() {
+    location.href = "/mst_projects/new";
   }
 
   edit() {

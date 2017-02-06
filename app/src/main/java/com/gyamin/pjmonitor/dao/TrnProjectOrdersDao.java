@@ -8,6 +8,8 @@ import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
 
+import java.util.List;
+
 /**
  */
 @Dao(config = AppConfig.class)
@@ -21,11 +23,18 @@ public interface TrnProjectOrdersDao {
     TrnProjectOrders selectById(Long id);
 
     /**
-     * @param id
+     * @param projectId
      * @return the TrnProjectOrders entity
      */
     @Select
-    TrnProjectOrders selectByProjectId(Long id);
+    List<TrnProjectOrders> selectByProjectId(Long projectId);
+
+    /**
+     * @param
+     * @return the TrnProjectOrders entity
+     */
+    @Select
+    List<TrnProjectOrders> selectNotRelatedProjects();
 
 
     /**

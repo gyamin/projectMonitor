@@ -8,10 +8,19 @@ import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
 
+import java.util.List;
+
 /**
  */
 @Dao(config = AppConfig.class)
 public interface MstWorkersDao {
+
+    /**
+     *
+     * @return
+     */
+    @Select
+    List<MstWorkers> selectAll();
 
     /**
      * @param id
@@ -40,4 +49,5 @@ public interface MstWorkersDao {
      */
     @Delete
     int delete(MstWorkers entity);
+
 }

@@ -1,35 +1,30 @@
 package com.gyamin.pjmonitor.service;
 
 import com.gyamin.pjmonitor.AppConfig;
-import com.gyamin.pjmonitor.dao.MstProjectsDao;
-import com.gyamin.pjmonitor.dao.MstProjectsDaoImpl;
-import com.gyamin.pjmonitor.dao.TrnProjectOrdersDao;
-import com.gyamin.pjmonitor.dao.TrnProjectOrdersDaoImpl;
+import com.gyamin.pjmonitor.dao.*;
 import com.gyamin.pjmonitor.entity.MstProjects;
 import com.gyamin.pjmonitor.entity.MstProjectsWorkers;
+import com.gyamin.pjmonitor.entity.MstWorkers;
 import com.gyamin.pjmonitor.entity.TrnProjectOrders;
 import com.gyamin.pjmonitor.web.bean.SessionInfoBean;
 import com.gyamin.pjmonitor.web.exception.ApplicationException;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.seasar.doma.jdbc.tx.TransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 @Service
 public class MstProjectsService {
-    private  ModelAndView modelAndView;
-
-    public MstProjectsService(ModelAndView modelAndView) {
-        this.modelAndView = modelAndView;
-    }
 
     /**
      *
      * @return
      * @throws ApplicationException
      */
-    public ModelAndView getDataForIndex() throws ApplicationException {
+    public Model getDataForIndex(Model model) throws ApplicationException {
 
         TransactionManager tm = AppConfig.singleton().getTransactionManager();
         MstProjectsDao dao = new MstProjectsDaoImpl();
@@ -38,9 +33,20 @@ public class MstProjectsService {
             return dao.selectStdAll();
         });
 
-        this.modelAndView.addObject("projects", mstProjectsWorkers);
+        model.addAttribute("projects", mstProjectsWorkers);
 
-        return this.modelAndView;
+        return model;
+    }
+
+    public Model getDataForNew(Model model) {
+        TransactionManager tm = AppConfig.singleton().getTransactionManager();
+
+        MstWorkersDao mstWorkersDao = new MstWorkersDaoImpl();
+
+        tm.required(() -> {
+            model.addAttribute("workers", mstWorkersDao.selectAll());
+        });
+        return model;
     }
 
     /**
@@ -48,7 +54,7 @@ public class MstProjectsService {
      * @return
      * @throws ApplicationException
      */
-    public ModelAndView getDataForEdit(Long id) throws ApplicationException {
+    public Model getDataForEdit(Long id, Model model) throws ApplicationException {
 
         TransactionManager tm = AppConfig.singleton().getTransactionManager();
 
@@ -56,14 +62,11 @@ public class MstProjectsService {
         TrnProjectOrdersDao trnProjectOrdersDao = new TrnProjectOrdersDaoImpl();
 
         tm.required(() -> {
-            this.modelAndView.addObject("project", mstProjectsDao.selectStdById(id));
-            this.modelAndView.addObject("", trnProjectOrdersDao.selectByProjectId(id));
-
+            model.addAttribute("project", mstProjectsDao.selectStdById(id));
+            model.addAttribute("projectOrders", trnProjectOrdersDao.selectByProjectId(id));
+            model.addAttribute("projectNotRelatedOrders", trnProjectOrdersDao.selectNotRelatedProjects());
         });
 
-        return this.modelAndView;
+        return model;
     }
-
-
-
 }

@@ -18,6 +18,7 @@
     </ul>
   </div>
   <div>
+    <p><button class="btn-new">新規作成</button></p>
     <table>
       <thead>
       <tr>
@@ -32,17 +33,17 @@
       </thead>
       <tbody>
 
-      <c:forEach var="item" items="${projects}">
+      <c:forEach var="project" items="${projects}">
         <tr>
-          <td>${item.projectNo}</td>
-          <td>${item.projectName}</td>
-          <td>${item.salesWorkerFamilyName} ${item.salesWorkerFirstName}</td>
-          <td>${item.plWorkerFamilyName} ${item.plWorkerFirstName}</td>
-          <td>${item.scheduledStartDate}</td>
-          <td>${item.scheduledEndDate}</td>
+          <td>${project.projectNo}</td>
+          <td>${project.projectName}</td>
+          <td>${project.salesWorkerFamilyName} ${project.salesWorkerFirstName}</td>
+          <td>${project.plWorkerFamilyName} ${project.plWorkerFirstName}</td>
+          <td>${project.scheduledStartDate}</td>
+          <td>${project.scheduledEndDate}</td>
           <td>
-            <button class="btn-eidt" data-id="${item.id}">編集</button>
-            <button class="btn-delete" data-id="${item.id}">削除</button>
+            <button class="btn-eidt" data-id="${project.id}">編集</button>
+            <button class="btn-delete" data-id="${project.id}">削除</button>
           </td>
         </tr>
       </c:forEach>
