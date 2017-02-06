@@ -31,14 +31,11 @@ public class MstProjectsController {
     public Object index(@RequestParam(required = false) String projectNo)
             throws ApplicationException, IllegalAccessException, NoSuchMethodException {
 
-        // プロジェクトデータ取得処理を行う
-        MstProjectsService service = new MstProjectsService();
-        List<MstProjectsWorkers> mstProjectsList = service.getMstProjectsData();
-
-        ModelAndView model = new ModelAndView("mst_projects/index");
-        model.addObject("projects", mstProjectsList);
-
-        return model;
+        // 一覧画面表示に必要なデータ取得を行う
+        ModelAndView modelAndView = new ModelAndView("mst_projects/index");
+        MstProjectsService service = new MstProjectsService(modelAndView);
+        modelAndView = service.getDataForIndex();
+        return modelAndView;
     }
 
     /**
@@ -49,17 +46,12 @@ public class MstProjectsController {
     public Object edit(@PathVariable String id)
             throws ApplicationException, IllegalAccessException, NoSuchMethodException {
 
-        TransactionManager tm = AppConfig.singleton().getTransactionManager();
-        MstProjectsDao dao = new MstProjectsDaoImpl();
-
         // プロジェクトデータ取得処理を行う
-        MstProjectsWorkers mstProjectsWorkers = tm.required(() -> {
-            return dao.selectJoinedById(Long.parseLong(id));
-        });
+        ModelAndView modelAndView = new ModelAndView("mst_projects/edit");
+        MstProjectsService service = new MstProjectsService(modelAndView);
+        modelAndView = service.getDataForEdit(Long.parseLong(id));
 
-        ModelAndView model = new ModelAndView("mst_projects/edit");
-        model.addObject("item", mstProjectsWorkers);
-        return model;
+        return modelAndView;
     }
 
 

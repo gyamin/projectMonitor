@@ -21,6 +21,14 @@ public interface TrnProjectOrdersDao {
     TrnProjectOrders selectById(Long id);
 
     /**
+     * @param id
+     * @return the TrnProjectOrders entity
+     */
+    @Select
+    TrnProjectOrders selectByProjectId(Long id);
+
+
+    /**
      * @param entity
      * @return affected rows
      */

@@ -28,13 +28,13 @@ public interface MstProjectsDao {
      * @return the MstProjects entity
      */
     @Select
-    MstProjectsWorkers selectJoinedById(Long id);
+    MstProjectsWorkers selectStdById(Long id);
 
     /**
      * @return the MstProjects entities
      */
     @Select
-    List<MstProjectsWorkers> selectJoinedAll();
+    List<MstProjectsWorkers> selectStdAll();
 
     /**
      * @param entity
