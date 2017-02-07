@@ -10,13 +10,29 @@
 </head>
 <body>
 <main id="app">
-  <form method="post" action="/mst_projects/edit/${project.id}">
+  <form method="post" action="/mst_projects/new">
   <div>
     <ul>
     <label>プロジェクトNo</label><li><input type="text" value=""></li>
     <label>プロジェクト名</label><li><input type="text" value=""></li>
-    <label>営業担当者</label><li></li>
-    <label>担当PL</label><li></li>
+    <label>営業担当者</label>
+      <li>
+        <select name="salseWorker">
+          <option value="" selected>未選択</option>
+          <c:forEach var="worker" items="${workers}">
+            <option value="${sorker.id}">${worker.familyName} ${worker.firstName}</option>
+          </c:forEach>
+        </select>
+      </li>
+    <label>担当PL</label>
+      <li>
+        <select name="plWorker">
+          <option value="" selected>未選択</option>
+          <c:forEach var="worker" items="${workers}">
+            <option value="${sorker.id}">${worker.familyName} ${worker.firstName}</option>
+          </c:forEach>
+        </select>
+      </li>
     <label>PJ開始予定日</label><li><input type="date" value=""></li>
     <label>PJ終了予定日</label><li><input type="date" value=""></li>
     </ul>

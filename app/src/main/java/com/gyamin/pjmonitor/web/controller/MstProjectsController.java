@@ -15,11 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 import java.util.List;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 public class MstProjectsController {
@@ -45,7 +44,22 @@ public class MstProjectsController {
      * @return
      */
     @RequestMapping(value = "/mst_projects/new", method = GET)
-    public Object create(Model model)
+    public Object newView(Model model)
+            throws ApplicationException, IllegalAccessException, NoSuchMethodException {
+
+        // プロジェクトデータ取得処理を行う
+        MstProjectsService service = new MstProjectsService();
+        model = service.getDataForNew(model);
+
+        return "mst_projects/new";
+    }
+
+    /**
+     * 新規登録処理
+     * @return
+     */
+    @RequestMapping(value = "/mst_projects/new", method = POST)
+    public Object create(@RequestParam  model)
             throws ApplicationException, IllegalAccessException, NoSuchMethodException {
 
         // プロジェクトデータ取得処理を行う
@@ -60,7 +74,7 @@ public class MstProjectsController {
      * @return
      */
     @RequestMapping(value = "/mst_projects/edit/{id}", method = GET)
-    public Object edit(@PathVariable String id, Model model)
+    public Object editView(@PathVariable String id, Model model)
             throws ApplicationException, IllegalAccessException, NoSuchMethodException {
 
         MstProjectsService service = new MstProjectsService();
