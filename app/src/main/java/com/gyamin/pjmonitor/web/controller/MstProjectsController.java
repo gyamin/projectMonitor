@@ -1,20 +1,16 @@
 package com.gyamin.pjmonitor.web.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gyamin.pjmonitor.AppConfig;
-import com.gyamin.pjmonitor.dao.MstProjectsDao;
-import com.gyamin.pjmonitor.dao.MstProjectsDaoImpl;
-import com.gyamin.pjmonitor.entity.MstProjects;
-import com.gyamin.pjmonitor.entity.MstProjectsWorkers;
 import com.gyamin.pjmonitor.service.MstProjectsService;
 import com.gyamin.pjmonitor.web.exception.ApplicationException;
-import org.seasar.doma.jdbc.tx.TransactionManager;
-import org.springframework.http.ResponseEntity;
+import com.gyamin.pjmonitor.web.request.MstProjectsNewRequest;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -58,15 +54,15 @@ public class MstProjectsController {
      * 新規登録処理
      * @return
      */
-    @RequestMapping(value = "/mst_projects/new", method = POST)
-    public Object create(@RequestParam  model)
+    @RequestMapping(value = "/mst_projects/new", method = RequestMethod.POST)
+    public Object create(@RequestBody @Valid MstProjectsNewRequest request, BindingResult result, Model model)
             throws ApplicationException, IllegalAccessException, NoSuchMethodException {
 
         // プロジェクトデータ取得処理を行う
         MstProjectsService service = new MstProjectsService();
-        model = service.getDataForNew(model);
+        int ret = service.createNewProject(request);
 
-        return "mst_projects/new";
+        return "mst_projects";
     }
 
     /**
