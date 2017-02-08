@@ -66,16 +66,18 @@ public class MstProjectsNewRequest {
         return scheduledStartDate;
     }
 
-    public void setScheduledStartDate(LocalDate scheduledStartDate) {
-        this.scheduledStartDate = scheduledStartDate;
+    public void setScheduledStartDate(String scheduledStartDate) {
+        LocalDate localDate = LocalDate.parse(scheduledStartDate);
+        this.scheduledStartDate = localDate;
     }
 
     public LocalDate getScheduledEndDate() {
         return scheduledEndDate;
     }
 
-    public void setScheduledEndDate(LocalDate scheduledEndDate) {
-        this.scheduledEndDate = scheduledEndDate;
+    public void setScheduledEndDate(String scheduledEndDate) {
+        LocalDate localDate = LocalDate.parse(scheduledEndDate);
+        this.scheduledEndDate = localDate;
     }
 
     public String getStatus() {

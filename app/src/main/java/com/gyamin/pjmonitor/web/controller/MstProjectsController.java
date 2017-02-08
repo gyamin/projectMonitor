@@ -2,6 +2,7 @@ package com.gyamin.pjmonitor.web.controller;
 
 import com.gyamin.pjmonitor.service.MstProjectsService;
 import com.gyamin.pjmonitor.web.exception.ApplicationException;
+import com.gyamin.pjmonitor.web.request.MstProjectsEditRequest;
 import com.gyamin.pjmonitor.web.request.MstProjectsNewRequest;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -54,13 +55,13 @@ public class MstProjectsController {
      * 新規登録処理
      * @return
      */
-    @RequestMapping(value = "/mst_projects/new", method = RequestMethod.POST)
-    public Object create(@RequestBody @Valid MstProjectsNewRequest request, BindingResult result, Model model)
+    @RequestMapping(value = "/mst_projects/new", method = POST)
+    public Object create(@ModelAttribute @Valid MstProjectsNewRequest formRequest, BindingResult result, Model model)
             throws ApplicationException, IllegalAccessException, NoSuchMethodException {
 
         // プロジェクトデータ取得処理を行う
         MstProjectsService service = new MstProjectsService();
-        int ret = service.createNewProject(request);
+        int ret = service.createNewProject(formRequest);
 
         return "mst_projects";
     }
@@ -77,6 +78,21 @@ public class MstProjectsController {
         model = service.getDataForEdit(Long.parseLong(id), model);
 
         return "mst_projects/edit";
+    }
+
+    /**
+     * 編集処理
+     * @return
+     */
+    @RequestMapping(value = "/mst_projects/edit/{id}", method = POST)
+    public Object edit(@PathVariable String id, @ModelAttribute @Valid MstProjectsEditRequest formRequest, BindingResult result, Model model)
+            throws ApplicationException, IllegalAccessException, NoSuchMethodException {
+
+        // プロジェクトデータ取得処理を行う
+        MstProjectsService service = new MstProjectsService();
+//        int ret = service.editProject(formRequest);
+
+        return "mst_projects";
     }
 
 

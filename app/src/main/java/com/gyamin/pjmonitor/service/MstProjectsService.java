@@ -12,6 +12,7 @@ import org.seasar.doma.jdbc.tx.TransactionManager;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -81,6 +82,7 @@ public class MstProjectsService {
         mstProjects.setScheduledStartDate(request.getScheduledStartDate());
         mstProjects.setScheduledEndDate(request.getScheduledEndDate());
         mstProjects.setStatus(request.getStatus());
+        mstProjects.setCreatedAt(LocalDateTime.now());
 
         MstProjectsDao mstProjectsDao = new MstProjectsDaoImpl();
 

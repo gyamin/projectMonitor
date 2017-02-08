@@ -13,34 +13,34 @@
   <form method="post" action="/mst_projects/new">
   <div>
     <ul>
-    <label>プロジェクトNo</label><li><input type="text" value=""></li>
-    <label>プロジェクト名</label><li><input type="text" value=""></li>
+    <label>プロジェクトNo</label><li><input type="text" name="projectNo" value=""></li>
+    <label>プロジェクト名</label><li><input type="text" name="projectName" value=""></li>
     <label>営業担当者</label>
       <li>
-        <select name="salseWorker">
+        <select name="salseWorkerId">
           <option value="" selected>未選択</option>
           <c:forEach var="worker" items="${workers}">
-            <option value="${sorker.id}">${worker.familyName} ${worker.firstName}</option>
+            <option value="${worker.id}">${worker.familyName} ${worker.firstName}</option>
           </c:forEach>
         </select>
       </li>
     <label>担当PL</label>
       <li>
-        <select name="plWorker">
+        <select name="plWorkerId">
           <option value="" selected>未選択</option>
           <c:forEach var="worker" items="${workers}">
-            <option value="${sorker.id}">${worker.familyName} ${worker.firstName}</option>
+            <option value="${worker.id}">${worker.familyName} ${worker.firstName}</option>
           </c:forEach>
         </select>
       </li>
-    <label>PJ開始予定日</label><li><input type="date" value=""></li>
-    <label>PJ終了予定日</label><li><input type="date" value=""></li>
+    <label>PJ開始予定日</label><li><input type="date" name="scheduledStartDate" value=""></li>
+    <label>PJ終了予定日</label><li><input type="date" name="scheduledEndDate" value=""></li>
     </ul>
   </div>
 
   <div>
     <button>戻る</button>
-    <button>登録</button>
+    <input type="submit" value="登録">
   </div>
   </form>
 </main>
