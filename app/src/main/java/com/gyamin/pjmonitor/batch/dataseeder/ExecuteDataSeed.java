@@ -1,5 +1,6 @@
 package com.gyamin.pjmonitor.batch.dataseeder;
 
+import com.gyamin.pjmonitor.batch.dataseeder.loader.MstWorkersBuilder;
 import com.gyamin.pjmonitor.batch.dataseeder.loader.TrnProjectOrdersBuilder;
 import com.gyamin.pjmonitor.batch.dataseeder.loader.TrnWorkedBuilder;
 import org.apache.log4j.Logger;
@@ -18,6 +19,11 @@ public class ExecuteDataSeed {
     public static void main(String[] args) {
         log.info("CSV読み込み処理開始");
         // 処理開始
+
+        // mst_workersテーブルにデータを登録
+        MstWorkersBuilder mstWorkersBuilder = new MstWorkersBuilder();
+        mstWorkersBuilder.buildUpData();
+
         // trn_workedテーブルにデータを登録
         TrnWorkedBuilder trnWorkedBuilder = new TrnWorkedBuilder();
         trnWorkedBuilder.buildUpData();

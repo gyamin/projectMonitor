@@ -40,6 +40,8 @@ class MstProjectsIndex {
   }
 }
 
-
-var index = new MstProjectsIndex();
+// mst_projects/indexページでのみロード
+if($.data('pageId') === "mst_projects/index" ) {
+  var index = new MstProjectsIndex();
+}
 

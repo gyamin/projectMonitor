@@ -8,7 +8,7 @@
           integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
           crossorigin="anonymous"></script>
 </head>
-<body>
+<body data-pageId="mst_projects/index">
 <main id="app">
   <div>
     <ul>
@@ -35,7 +35,7 @@
 
       <c:forEach var="project" items="${projects}">
         <tr>
-          <td>${project.projectNo}</td>
+          <td><a href="/mst_project/report/${project.id}" />${project.projectNo}</td>
           <td>${project.projectName}</td>
           <td>${project.salesWorkerFamilyName} ${project.salesWorkerFirstName}</td>
           <td>${project.plWorkerFamilyName} ${project.plWorkerFirstName}</td>
