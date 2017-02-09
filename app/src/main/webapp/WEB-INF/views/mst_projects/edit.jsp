@@ -15,14 +15,9 @@
     <ul>
     <label>プロジェクトNo</label><li><input type="text" name="projectNo" value="${project.projectNo}"></li>
     <label>プロジェクト名</label><li><input type="text" name="projectName" value="${project.projectName}"></li>
-    <label>営業担当者</label>
+    <label>営業担当者</label><li>${project.salesWorkerFamilyName} ${project.salesWorkerFirstName}</li>
+    <label>営業担当者 変更</label>
     <li>
-      <c:forEach var="worker" items="${workers}">
-        <form:select path="c040Form.selectedIsbn" items="${c040ModelList}" itemLabel="name" itemValue="isbn" delimiter=" " />
-        <option value="${worker.id}">${worker.familyName} ${worker.firstName}</option>
-      </c:forEach>
-
-
       <select name="salseWorkerId">
         <option value="" selected>未選択</option>
         <c:forEach var="worker" items="${workers}">

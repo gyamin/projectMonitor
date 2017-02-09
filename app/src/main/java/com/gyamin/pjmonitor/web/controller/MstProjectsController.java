@@ -63,7 +63,7 @@ public class MstProjectsController {
         MstProjectsService service = new MstProjectsService();
         int ret = service.createNewProject(formRequest);
 
-        return "mst_projects";
+        return "mst_projects/index";
     }
 
     /**
@@ -90,9 +90,9 @@ public class MstProjectsController {
 
         // プロジェクトデータ取得処理を行う
         MstProjectsService service = new MstProjectsService();
-//        int ret = service.editProject(formRequest);
+        service.editProject(formRequest, id);
 
-        return "mst_projects";
+        return "redirect:/mst_projects";
     }
 
 
