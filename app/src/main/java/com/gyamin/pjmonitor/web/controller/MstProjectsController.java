@@ -95,5 +95,20 @@ public class MstProjectsController {
         return "redirect:/mst_projects";
     }
 
+    /**
+     * プロジェクトレポート表示処理
+     * @return
+     */
+    @RequestMapping(value = "/mst_projects/report/{id}", method = GET)
+    public Object reportView(@PathVariable String id, Model model)
+            throws ApplicationException, IllegalAccessException, NoSuchMethodException {
+
+        // プロジェクトデータ取得処理を行う
+        MstProjectsService service = new MstProjectsService();
+        model = service.getDataForReport(id, model);
+
+        return "mst_projects/report";
+    }
+
 
 }

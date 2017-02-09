@@ -35,7 +35,7 @@
 
       <c:forEach var="project" items="${projects}">
         <tr>
-          <td><a href="/mst_project/report/${project.id}" />${project.projectNo}</td>
+          <td><a href="/mst_projects/report/${project.id}" />${project.projectNo}</td>
           <td>${project.projectName}</td>
           <td>${project.salesWorkerFamilyName} ${project.salesWorkerFirstName}</td>
           <td>${project.plWorkerFamilyName} ${project.plWorkerFirstName}</td>

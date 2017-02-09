@@ -2,6 +2,7 @@ package com.gyamin.pjmonitor.dao;
 
 import com.gyamin.pjmonitor.AppConfig;
 import com.gyamin.pjmonitor.entity.MstProjects;
+import com.gyamin.pjmonitor.entity.MstProjectsReport;
 import com.gyamin.pjmonitor.entity.MstProjectsWorkers;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
@@ -15,6 +16,14 @@ import java.util.List;
  */
 @Dao(config = AppConfig.class)
 public interface MstProjectsDao {
+
+    /**
+     * @param id
+     * @return the MstProjectsReport entity
+     */
+    @Select
+    List<MstProjectsReport> selectReportData(Long id);
+
 
     /**
      * @param id

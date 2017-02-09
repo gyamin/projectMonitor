@@ -151,4 +151,15 @@ public class MstProjectsService {
         });
 
     }
+
+    public Model getDataForReport(String id, Model model) {
+        TransactionManager tm = AppConfig.singleton().getTransactionManager();
+        MstProjectsDao dao = new MstProjectsDaoImpl();
+
+        tm.required(() -> {
+            model.addAttribute("report", dao.selectReportData(Long.valueOf(id)));
+        });
+
+        return model;
+    }
 }
