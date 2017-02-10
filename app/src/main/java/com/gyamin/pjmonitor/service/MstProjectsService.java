@@ -2,10 +2,7 @@ package com.gyamin.pjmonitor.service;
 
 import com.gyamin.pjmonitor.AppConfig;
 import com.gyamin.pjmonitor.dao.*;
-import com.gyamin.pjmonitor.entity.MstProjects;
-import com.gyamin.pjmonitor.entity.MstProjectsWorkers;
-import com.gyamin.pjmonitor.entity.MstWorkers;
-import com.gyamin.pjmonitor.entity.TrnProjectOrders;
+import com.gyamin.pjmonitor.entity.*;
 import com.gyamin.pjmonitor.web.bean.SessionInfoBean;
 import com.gyamin.pjmonitor.web.exception.ApplicationException;
 import com.gyamin.pjmonitor.web.request.MstProjectsEditRequest;
@@ -15,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MstProjectsService {
@@ -156,9 +153,21 @@ public class MstProjectsService {
         TransactionManager tm = AppConfig.singleton().getTransactionManager();
         MstProjectsDao dao = new MstProjectsDaoImpl();
 
-        tm.required(() -> {
-            model.addAttribute("report", dao.selectReportData(Long.valueOf(id)));
+        // 業務時間集計データを取得する
+        List<MstProjectsReport> mstProjectsReportList = tm.required(() -> {
+            return dao.selectReportData(Long.valueOf(id));
         });
+        model.addAttribute("reports", mstProjectsReportList);
+
+        // 業務時間集計データから、週番号キーにし、対応する月を値に取るMapを作成
+        Map<String, String> weekMonthNum = new HashMap<String, String>();
+        for(MstProjectsReport item : mstProjectsReportList) {
+            if(! weekMonthNum.containsKey(item.getWeekNumOfYear())) {
+                weekMonthNum.put(item.getWeekNumOfYear(), item.getMonthOfYear());
+            }
+        }
+
+        model.addAttribute("weekMonthNum", weekMonthNum);
 
         return model;
     }

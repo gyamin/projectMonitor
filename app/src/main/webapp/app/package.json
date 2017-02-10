@@ -21,6 +21,7 @@
   "repository": "https://github.com/gyamin/projectMonitor.git",
   "dependencies": {
     "jquery": "^3.1.1",
+    "slickgrid": "^2.3.3",
     "vue": "^2.1.10",
     "watch": "^1.0.1"
   },

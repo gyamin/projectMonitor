@@ -27,6 +27,9 @@ public class MstProjectsReport {
     @Column(name = "first_name")
     String firstName;
 
+    @Column(name = "month_of_year")
+    String monthOfYear;
+
     @Column(name = "week_num_of_year")
     String weekNumOfYear;
 
@@ -71,6 +74,14 @@ public class MstProjectsReport {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getMonthOfYear() {
+        return monthOfYear;
+    }
+
+    public void setMonthOfYear(String monthOfYear) {
+        this.monthOfYear = monthOfYear;
     }
 
     public String getWeekNumOfYear() {

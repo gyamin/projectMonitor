@@ -11,6 +11,8 @@ use v6.9.4
 ```
 
 ## 開発に依存するnpmパッケージのインストール
+
+### ベース
 ```bash
 $ npm install watch --save-dev
 $ npm install node-sass --save-dev
@@ -20,6 +22,11 @@ $ npm install sass-loader --save-dev
 $ npm install babel-loader babel-core babel-preset-es2015 --save-dev
 $ npm install vue --save
 $ npm install jquery --save
+```
+
+### グリッド表示
+```bash
+$ npm install slickgrid --save
 ```
 
 ## 開発 
